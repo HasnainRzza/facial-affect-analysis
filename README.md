@@ -1,102 +1,103 @@
-Facial Analysis Dataset Preparation
-Project Overview
-This repository contains a Jupyter notebook (i221996_01.ipynb) designed to extract and organize a dataset for facial analysis or emotion recognition tasks. The notebook processes a ZIP archive containing images and annotations (expression, valence, arousal, and landmarks) and compiles them into a structured Pandas DataFrame. It serves as a preprocessing step for machine learning pipelines, with support for potential image augmentation using the Albumentations library.
-Dataset Description
-The dataset is sourced from a ZIP file (DL_Assignment1_Dataset.zip) and includes:
+# Facial Analysis Dataset Preparation
 
-Images: Stored as .jpg files in Dataset/Dataset/images.
-Annotations: Stored as .npy files in Dataset/Dataset/annotations, with labels for:
-expression: Integer labels (e.g., 0-7, likely for emotions like neutral, happy, etc.).
-valence and arousal: Float values (-1 to 1) representing emotional dimensions.
-landmark: Float values, likely indicating facial landmark distances or coordinates.
+A Jupyter notebook for preprocessing facial analysis datasets, extracting images and annotations into a structured Pandas DataFrame for emotion recognition tasks.
 
+## Project Overview
 
-Output: A Pandas DataFrame with 3999 records, mapping image paths to their respective labels.
+This repository contains a Jupyter notebook (`i221996_01.ipynb`) designed to extract and organize a dataset for facial analysis or emotion recognition tasks. The notebook processes a ZIP archive containing images and annotations (expression, valence, arousal, and landmarks) and compiles them into a structured Pandas DataFrame.
 
-Requirements
+This serves as a preprocessing step for machine learning pipelines, with support for potential image augmentation using the Albumentations library.
 
-Python Version: 3.12.3
-Dependencies:pip install albumentations==1.4.3 numpy pandas opencv-python-headless
+## Dataset Description
 
+The dataset is sourced from a ZIP file (`Facial_AFFECT.zip`) and includes:
 
-Environment: Google Colab with GPU acceleration (T4) and Google Drive integration.
-Storage: Access to Google Drive for the dataset ZIP file (/content/drive/MyDrive/A01_Dataset_DL_/DL_Assignment1_Dataset.zip).
+- **Images**: `.jpg` files in `Dataset/Dataset/images/`
+- **Annotations**: `.npy` files in `Dataset/Dataset/annotations/` with labels for:
+  - `expression`: Integer labels (0-7) for emotion categories
+  - `valence` and `arousal`: Float values (-1 to 1) representing emotional dimensions
+  - `landmark`: Float values for facial landmark coordinates/distances
 
-Installation
+## Features
 
-Clone the repository:git clone https://github.com/your-username/facial-analysis-dataset-prep.git
+- Extracts and processes dataset from ZIP archive
+- Creates structured Pandas DataFrame with 3999 records
+- Filters invalid entries (negative expressions)
+- Prepares augmentation directory for future use
+- Maps image paths to their respective labels
 
+## Installation
 
-Install dependencies:pip install -r requirements.txt
+### Prerequisites
 
+- Python 3.12.3
+- Google Colab with GPU acceleration (T4) recommended
 
-Ensure the dataset ZIP file is available in your Google Drive or local storage, and update the ARCHIVE_PATH in the notebook if necessary.
+### Dependencies
 
-Usage
+```bash
+pip install albumentations==1.4.3 numpy pandas opencv-python-headless
+```
+ 
+ ### Setup
+ ```bash
+git clone https://github.com/Hasnain_Rzza/facial-affect-analysis.git
+cd facial-analysis-dataset-prep
+```
 
-Open the Notebook:
+### Load Execution
+```bash
+1. Update the ARCHIVE_PATH in the notebook to point to your local dataset
+2. Run all cells sequentially
+```
 
-Run i221996_01.ipynb in Google Colab or a local Jupyter environment.
-Mount Google Drive in Colab to access the dataset:from google.colab import drive
-drive.mount('/content/drive')
+### Output
 
+```bash
+path	expression	valence	arousal	landmark
+/content/dataset_space/Dataset/Dataset/images/...	0	-0.176846	-0.077640	-0.006667
+...	0	-0.367789	0.183895	44.951579
+```
 
+### Results
+```bash
+Final metrics:
+Accuracy  : 0.5341
+F1        : 0.5102
+Kappa     : 0.4675
+RMSE      : 14.1450
+ValCCC    : 0.5967
+ValCorr   : 0.6399
+AroCCC    : 0.4907
+AroCorr   : 0.5255
+LndCCC    : -0.0000
+LndCorr   : -0.0012
+```
 
-
-Key Steps in the Notebook:
-
-Extracts the ZIP archive to /content/dataset_space if not already extracted.
-Processes images and annotations, filtering out invalid entries (negative expressions).
-Creates a Pandas DataFrame with columns: path, expression, valence, arousal, landmark.
-Prepares an augmentation directory (aug_photos) for future use.
-
-
-Output:
-
-A DataFrame with 3999 records and no missing annotations.
-Sample output:| path                                               | expression | valence   | arousal   | landmark  |
-|----------------------------------------------------|------------|-----------|-----------|-----------|
-| /content/dataset_space/Dataset/Dataset/images/... | 0          | -0.176846 | -0.077640 | -0.006667 |
-| ...                                                | 0          | -0.367789 | 0.183895  | 44.951579 |
-
-
-
-
-Running the Notebook:
-
-Ensure the dataset ZIP is accessible.
-Execute all cells sequentially. The notebook is lightweight and processes ~4000 records efficiently.
-
-
-
-Directory Structure
+### Structure
+```bash
 facial-analysis-dataset-prep/
 ├── i221996_01.ipynb          # Main Jupyter notebook
-├── README.md                 # This file
+├── README.md                 # Project documentation
 ├── requirements.txt          # Python dependencies
 └── /content/dataset_space/   # Extracted dataset (created during execution)
     ├── Dataset/Dataset/
     │   ├── images/           # JPG images
     │   ├── annotations/      # .npy files for labels
-    └── aug_photos/           # Directory for augmented images (unused)
+    └── aug_photos/           # Directory for augmented images
+```
 
-Future Work
+### Improvement
+```bash
 
-Implement image augmentation using Albumentations to enhance dataset diversity.
-Visualize data distributions (e.g., expression histograms, valence-arousal scatter plots).
-Split the dataset into train/test sets for machine learning tasks.
-Develop models for emotion classification (using expression) or regression (using valence and arousal).
+Key improvements made:
+- Better formatting with proper Markdown syntax
+- Clearer section organization
+- Improved code block formatting
+- More professional tone
+- Better visual hierarchy
+- Consistent structure throughout
+- Removed redundant information
+- Added proper emoji-free formatting for professional use
+```
 
-Contributing
-Contributions are welcome! Please:
-
-Fork the repository.
-Create a feature branch (git checkout -b feature/your-feature).
-Commit changes (git commit -m 'Add your feature').
-Push to the branch (git push origin feature/your-feature).
-Open a pull request.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-Contact
-For questions or suggestions, please open an issue or contact [your-email@example.com].
